@@ -5,129 +5,73 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VinzHub</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
 <style>
-/* Reset & base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
 body {
-    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #111;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #0f0c29;  /* darker gradient */
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    color: #fff;
-    padding: 20px;
+    height: 100vh;
+    text-align: center;
 }
 
 .container {
-    width: 100%;
-    max-width: 480px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    text-align: center;
-    animation: fadeIn 0.8s ease-in-out;
+    width: 90%;
+    max-width: 400px;
 }
 
 h1 {
-    font-size: 2rem;
     margin-bottom: 20px;
-    color: #00c6ff;
-    letter-spacing: 1px;
 }
 
 textarea {
     width: 100%;
     height: 100px;
-    padding: 15px;
-    border-radius: 12px;
+    padding: 10px;
     border: none;
+    border-radius: 5px;
     resize: none;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    font-size: 0.95rem;
-    outline: none;
     margin-bottom: 15px;
+    font-size: 14px;
 }
 
 button {
-    padding: 12px 25px;
-    border-radius: 30px;
+    padding: 10px 20px;
     border: none;
-    font-size: 1rem;
-    font-weight: 600;
+    border-radius: 5px;
+    background: #2563eb;
+    color: white;
     cursor: pointer;
-    color: #fff;
-    background: linear-gradient(45deg, #00c6ff, #0072ff);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 5px 15px rgba(0, 114, 255, 0.5);
 }
 
 button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 5px 20px rgba(0, 114, 255, 0.8);
-}
-
-.counter {
-    margin-top: 10px;
-    font-size: 0.9rem;
-    color: #bbb;
-}
-
-.copied {
-    font-size: 0.85rem;
-    color: #00ffae;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    margin-top: 5px;
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    background: #1d4ed8;
 }
 </style>
 </head>
 
 <body>
+
 <div class="container">
     <h1>VinzHub</h1>
 
-    <textarea id="scriptArea" readonly>
+    <textarea id="script" readonly>
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba-hub/Vinz-Hub/refs/heads/main/EscapeTsunamiForBrainrot"))()
     </textarea>
 
-    <button onclick="copyScript()">Copy Script</button>
-
-    <div class="counter" id="countText">Copied: 0 times</div>
-    <div class="copied" id="copiedMsg">✔ Script Copied!</div>
+    <button onclick="copyText()">Copy Script</button>
 </div>
 
 <script>
-let count = 0;
-
-function copyScript() {
-    const textarea = document.getElementById("scriptArea");
-    navigator.clipboard.writeText(textarea.value).then(() => {
-        count++;
-        document.getElementById("countText").innerText = `Copied: ${count} times`;
-
-        const msg = document.getElementById("copiedMsg");
-        msg.style.opacity = 1;
-        setTimeout(() => { msg.style.opacity = 0; }, 1500);
-    });
+function copyText() {
+    const text = document.getElementById("script").value;
+    navigator.clipboard.writeText(text);
+    alert("Script Copied!");
 }
 </script>
+
 </body>
 </html>
