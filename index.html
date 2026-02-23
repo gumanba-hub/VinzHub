@@ -6,70 +6,119 @@
 <title>VinzHub</title>
 
 <style>
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background: #111;
-    color: white;
+}
+
+body {
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    background: linear-gradient(135deg, #111827, #1f2937);
+    color: white;
+}
+
+/* Rainbow Border Wrapper */
+.rainbow-border {
+    padding: 3px;
+    border-radius: 18px;
+    background: linear-gradient(
+        45deg,
+        red, orange, yellow, green, cyan, blue, violet, red
+    );
+    background-size: 400%;
+    animation: rainbow 8s linear infinite;
+}
+
+/* Inner Card */
+.card {
+    width: 90%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 16px;
+    background: #111827;
     text-align: center;
 }
 
-.container {
-    width: 90%;
-    max-width: 400px;
+/* Animation */
+@keyframes rainbow {
+    0% { background-position: 0% }
+    100% { background-position: 400% }
 }
 
 h1 {
     margin-bottom: 20px;
+    font-size: 28px;
 }
 
 textarea {
     width: 100%;
-    height: 100px;
-    padding: 10px;
+    height: 110px;
+    padding: 12px;
+    border-radius: 8px;
     border: none;
-    border-radius: 5px;
     resize: none;
     margin-bottom: 15px;
     font-size: 14px;
 }
 
 button {
-    padding: 10px 20px;
+    width: 100%;
+    padding: 12px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     background: #2563eb;
     color: white;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
+    transition: 0.3s ease;
 }
 
 button:hover {
-    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(37,99,235,0.6);
+}
+
+.success {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #22c55e;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
-    <h1>VinzHub</h1>
+<div class="rainbow-border">
+    <div class="card">
+        <h1>VinzHub</h1>
 
-    <textarea id="script" readonly>
+        <textarea id="script" readonly>
 loadstring(game:HttpGet("https://raw.githubusercontent.com/gumanba-hub/Vinz-Hub/refs/heads/main/EscapeTsunamiForBrainrot"))()
-    </textarea>
+        </textarea>
 
-    <button onclick="copyText()">Copy Script</button>
+        <button onclick="copyText()">Copy Script</button>
+        <div class="success" id="successMsg">✔ Script Copied!</div>
+    </div>
 </div>
 
 <script>
 function copyText() {
     const text = document.getElementById("script").value;
-    navigator.clipboard.writeText(text);
-    alert("Script Copied!");
+    navigator.clipboard.writeText(text).then(() => {
+        const msg = document.getElementById("successMsg");
+        msg.style.opacity = "1";
+        setTimeout(() => {
+            msg.style.opacity = "0";
+        }, 1500);
+    });
 }
 </script>
 
